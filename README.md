@@ -18,7 +18,7 @@ Add this to your package's pubspec.yaml file:
 ```yaml
 sunmi_flutter_print: 
     git:
-      url: git://github.com/cuongbatit1/sunmi_flutter_print.git
+      url: git://github.com/Isgi/sunmi_flutter_print.git
       ref: master
 ```
 ### 2. Install it
