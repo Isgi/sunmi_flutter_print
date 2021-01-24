@@ -64,6 +64,15 @@ public class SunmiFlutterPrintPlugin implements MethodCallHandler {
     this.channel.setMethodCallHandler(this);
     this.context = context; //not used when using onCreate
   }
+  
+  public static int[] toPrimitive(Integer[] IntegerArray) {
+
+    int[] result = new int[IntegerArray.length];
+    for (int i = 0; i < IntegerArray.length; i++) {
+      result[i] = IntegerArray[i].intValue();
+    }
+    return result;
+  }
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
