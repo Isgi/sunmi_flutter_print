@@ -19,6 +19,8 @@ import com.sunmi.peripheral.printer.InnerPrinterException;
 import com.sunmi.peripheral.printer.InnerPrinterManager;
 import com.sunmi.peripheral.printer.SunmiPrinterService;
 
+import java.util.List;
+
 /** SunmiFlutterPrintPlugin */
 public class SunmiFlutterPrintPlugin implements MethodCallHandler {
 
@@ -111,9 +113,12 @@ public class SunmiFlutterPrintPlugin implements MethodCallHandler {
       this.printOriText(text);
     }
     else if(call.method.equals("printColumnText")){
-      String[] text = call.argument("text");
-      int[] width = call.argument("width");
-      int[] align = call.argument("align");
+      List<String> listText = call.argument("text");
+      List<Integer> listWidth = call.argument("width");
+      List<Integer> listAlign = call.argument("align");
+      String[] text = listText.toArray(new String[listText.size()]);
+      int[] width = toPrimitive(listWidth.toArray(new Integer[listWidth.size()]));
+      int[] align = toPrimitive(listAlign.toArray(new Integer[listAlign.size()]));
       this.printColumnText(text,width,align);
     }
     else if(call.method.equals("printQRCode")){
@@ -544,7 +549,7 @@ public class SunmiFlutterPrintPlugin implements MethodCallHandler {
       return;
     }
     try {
-      sunmiPrinterService.printColumnsString(textArray,widthArray,alignArray, null);
+      sunmiPrinterService.printColumnsText(textArray,widthArray,alignArray, null);
     } catch (RemoteException e) {
       handleRemoteException(e);
     }
